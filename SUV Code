@@ -1,0 +1,117 @@
+import turtle
+
+# Vehicle component classes
+
+class Body:#body class
+    def __init__(self, color):
+        self.color = color
+
+    def draw(self, x, y, pen):#main drawing code
+        pen.penup()
+        pen.goto(x, y)
+        pen.pendown()
+        pen.fillcolor(self.color)
+        pen.begin_fill()
+        for _ in range(2):
+            pen.forward(200)
+            pen.left(90)
+            pen.forward(50)
+            pen.left(90)
+        pen.end_fill()
+
+        #draws trapezoid on top of the body
+        pen.penup()
+        pen.goto(x + 50, y + 90)
+        pen.pendown()
+        pen.fillcolor("red")
+        pen.begin_fill()
+        pen.forward(140)
+        pen.right(75)
+        pen.forward(40)
+        pen.right(105)
+        pen.forward(160)
+        pen.right(105)
+        pen.forward(40)
+        pen.right(75)
+        pen.end_fill()
+
+class Wheel:#wheels of the car
+    def __init__(self, color):
+        self.color = color
+
+    def draw(self, x, y, pen):#used to make a circular shape
+        pen.penup()
+        pen.goto(x, y)
+        pen.pendown()
+        pen.fillcolor(self.color)
+        pen.begin_fill()
+        pen.circle(20)
+        pen.end_fill()
+
+class Window:#creates the windows of the car
+    def __init__(self, color):
+        self.color = color
+
+    def draw(self, x, y, pen):#makes the windows rectangular
+        pen.penup()
+        pen.goto(x, y)
+        pen.pendown()
+        pen.fillcolor(self.color)
+        pen.begin_fill()
+        for _ in range(2):
+            pen.forward(40)
+            pen.left(90)
+            pen.forward(30)
+            pen.left(90)
+        pen.end_fill()
+
+class Antenna:#class for the antenna
+    def __init__(self, color):
+        self.color = color
+
+    def draw(self, x, y, pen):
+        pen.penup()
+        pen.goto(x, y - 20)
+        pen.pendown()
+        pen.pencolor(self.color)
+        pen.left(90)
+        pen.forward(60)
+
+class Headlights:#class for the headlights
+    def __init__(self, color):
+        self.color = color
+
+    def draw(self, x, y, pen):
+        pen.penup()
+        pen.goto(x, y)
+        pen.pendown()
+        pen.fillcolor(self.color)
+        pen.begin_fill()
+        for _ in range(2):
+            pen.forward(15)
+            pen.left(90)
+            pen.forward(10)
+            pen.left(90)
+        pen.end_fill()
+
+#executes and draws the whole car
+def draw_vehicle(pen, body_color):
+    Body(body_color).draw(-100, 0, pen)
+    Wheel("black").draw(-80, -20, pen)
+    Wheel("black").draw(80, -20, pen)
+    Window("lightblue").draw(-30, 55, pen)
+    Window("lightblue").draw(40, 55, pen)
+    Antenna("black").draw(-90, 70, pen)
+    Headlights("gray").draw(-100, 30, pen)
+
+# Main execution function
+def main():
+    screen = turtle.Screen()
+    screen.bgcolor("white")
+    pen = turtle.Turtle()
+    pen.speed(3)
+    draw_vehicle(pen, "red")
+    screen.mainloop()
+
+if __name__ == "__main__":
+    main()
